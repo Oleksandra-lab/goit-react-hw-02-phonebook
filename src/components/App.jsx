@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
@@ -15,20 +14,6 @@ export class App extends Component {
     filter: '',
   };
 
-  componentDidMount(){
-    const stringifiedContacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(stringifiedContacts) ?? [];
-    this.setState({
-      contacts: parsedContacts,
-    });
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if(this.state.contacts.length!==prevState.contacts.length){
-      const stringifiedContacts = JSON.stringify(this.state.contacts)
-      localStorage.setItem('contacts', stringifiedContacts )
-    }
-  }
 
   addContact = newContact => {
     const contactExist = this.state.contacts.some(
@@ -58,7 +43,7 @@ console.log("newContact", newContact);
   this.setState({filter: name.toLowerCase()})
  }
 
-//  filteredContacts = this.state.contacts.filter(({name}) =>name.toLowerCase().includes(this.state.filter))
+
 filteredContacts= () =>  {const {filter, contacts} = this.state;
 return contacts.filter(({name}) =>name.toLowerCase().includes(filter))
 }

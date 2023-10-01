@@ -1,8 +1,15 @@
+import React from 'react';
+import { FilterWrap } from './Filter.styled';
 
-import React from 'react'
-
-export default function Filter({onFilter}) {
+export default function Filter({ onFilter }) {
   return (
-    <input type="text" name ="filter" onChange={evt => onFilter(evt.target.value)}/>
-  )
+    <FilterWrap>
+      Find contact by name
+      <input
+        type="text"
+        name="filter"
+        onChange={evt => onFilter(evt.target.value)}
+      />
+    </FilterWrap>
+  );
 }

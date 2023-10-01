@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {nanoid} from 'nanoid'
-import { Form, Text, Input, Button} from './ContactForm.styled'
+import { FormWrap, Form, Text, Input, Button} from './ContactForm.styled'
 
 export default class ContactForm extends Component {
   state = {
@@ -36,8 +36,7 @@ export default class ContactForm extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <div>
-        Contact Form
+      <FormWrap>
         <Form onSubmit={this.handleSubmit}>
           <label>
             <Text>Name</Text>
@@ -66,7 +65,7 @@ export default class ContactForm extends Component {
 
           <Button type="submit">Add contacts</Button>
         </Form>
-      </div>
+      </FormWrap>
     );
   }
 }
