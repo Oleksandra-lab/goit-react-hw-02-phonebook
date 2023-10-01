@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {nanoid} from 'nanoid'
 import { Form, Text, Input, Button} from './ContactForm.styled'
 
 export default class ContactForm extends Component {
@@ -13,11 +13,26 @@ export default class ContactForm extends Component {
       [evt.target.name]: evt.target.value,
     });
   };
-  // handleSubmit (evt) => {
-  //     evt.preventDefault();
-  //     const { name, number} = this.state
-  //     form.reset();
-  // }
+
+  handleSubmit = (evt) => {
+      evt.preventDefault();
+      const { name, number} = this.state;
+
+      const newContact = {
+        id: nanoid(),
+        name: name,
+        number: number,
+    
+      }
+
+      this.props.addContact(newContact)
+
+      this.setState({
+        name: '',
+        number: '',
+      });
+  
+  }
   render() {
     const { name, number } = this.state;
     return (
@@ -29,8 +44,11 @@ export default class ContactForm extends Component {
             <Input
               onChange={this.handleInputChange}
               type="text"
+              placeholder="Enter name"
+  
               name="name"
-              value={this.state.name}
+              value={name}
+              required
             />
           </label>
           <label>
@@ -38,8 +56,11 @@ export default class ContactForm extends Component {
             <Input
               onChange={this.handleInputChange}
               type="tel"
+              placeholder="Enter number"
+              
               name="number"
-              value={this.state.number}
+              value={number}
+              required
             />
           </label>
 
